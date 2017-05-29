@@ -1,0 +1,45 @@
+<header>
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">Welcome to Angular2 Demo App</a>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="row">
+        <div class="col-sm-4">
+            <div *ngIf="users">
+                <ul class="list-group users-list">
+                    <!-- *ngFor is used for repetitive loops -->
+                    <li class="list-group-item" 
+                        *ngFor="let user of users"
+                        (click)="selectUser(user)"
+                        [class.active]="user === activeUser">
+                        {{ user.name }} ({{ user.username }})
+                    </li>
+                </ul>
+                <!-- 
+                    Concept of Angular2 Output is used here,
+                   Output is used like event binding.
+                -->
+                <user-form (userCreated)="onUserCreated($event)"></user-form>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <!--
+                Concept of Angular2 Input is used here,
+                Input is used like property binding.
+            -->
+            <user-profile [user]="activeUser"></user-profile>
+            <!-- *ngIf is used for conditional statements -->
+            <div class="jumbotron" *ngIf="!activeUser">
+                <span class="glyphicon glyphicon-hand-left"></span>
+                <h2>Choose a User</h2>
+            </div>
+            <p>{{ message }}</p>
+        </div>
+    </div>
+</main>
+<footer class="pull-right">
+    Copyright @ Ashwani K Luhaniwal
+</footer>
